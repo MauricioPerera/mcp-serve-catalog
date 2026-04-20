@@ -112,7 +112,7 @@ describe("docToResource / resolveResourceName", () => {
       name: "foo",
       title: "Foo",
       summary: "A foo doc",
-      doc_path: "docs/foo.md",
+      path: "docs/foo.md",
     });
     expect(r.uri).toBe("catalog://docs/foo");
     expect(r.mimeType).toBe("text/markdown");
@@ -136,7 +136,7 @@ describe("promptToMcp / renderPrompt", () => {
     name: "greet",
     purpose: "greet",
     description: "",
-    prompt_path: "prompts/greet.md",
+    path: "prompts/greet.md",
     input_vars: [
       { name: "who", description: "target", required: true },
       { name: "tone", required: false },

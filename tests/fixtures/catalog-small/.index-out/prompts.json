@@ -6,7 +6,7 @@
       "name": "greet",
       "purpose": "Greet someone by name",
       "description": "Minimal prompt template for tests.",
-      "prompt_path": "prompts/greet.md",
+      "path": "prompts/greet.md",
       "input_vars": [
         { "name": "name", "description": "who to greet", "required": true }
       ]

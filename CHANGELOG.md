@@ -4,6 +4,23 @@ All notable changes to mcp-serve-catalog.
 
 ---
 
+## [0.1.1] - 2026-04-19
+
+### Fixed
+
+- **Doc / prompt path field**: the reader expected `doc_path` and `prompt_path` but a2e-skills' `tools/gen-index.ts` actually emits the unified field name `path` (matching the canonical frontmatter schema). A backward-compatible normalizer now accepts both — partitions using the legacy field names still work, new partitions using `path` work directly. Surfaced when running end-to-end against a real a2e-skills repo at `/bin/mcp-read catalog://docs/<name>` (was throwing `-32603 path must be string, got undefined`).
+
+### Changed
+
+- `DocEntry.doc_path` → `DocEntry.path`
+- `PromptEntry.prompt_path` → `PromptEntry.path`
+- Fixture files updated to use the new field names
+- `mapper.test.ts` updated accordingly
+
+No functional regression. `tools/list` and `tools/call` paths were already correct (skills use `entry_path` which matched).
+
+---
+
 ## [0.1.0] - 2026-04-19
 
 Initial release. Implements the full CONTRACT.md § 7 artifact list for v0.1.
@@ -53,4 +70,5 @@ Initial release. Implements the full CONTRACT.md § 7 artifact list for v0.1.
 - **Multi-catalog serving** from one process
 - **`/admin/reload`** HTTP endpoint for webhook-triggered cache invalidation
 
+[0.1.1]: https://github.com/MauricioPerera/mcp-serve-catalog/releases/tag/v0.1.1
 [0.1.0]: https://github.com/MauricioPerera/mcp-serve-catalog/releases/tag/v0.1.0

@@ -1,6 +1,6 @@
 {
   "name": "mcp-serve-catalog",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Stateless MCP server that exposes an a2e-skills catalog to any MCP-compliant client. Zero runtime deps.",
   "type": "module",

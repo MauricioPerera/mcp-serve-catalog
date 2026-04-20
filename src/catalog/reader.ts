@@ -47,7 +47,12 @@ export interface DocEntry {
   name: string;
   title: string;
   summary: string;
-  doc_path: string;
+  /**
+   * Relative path to the doc body file, from the content worktree root.
+   * Some catalog generators emit this as `path`, older ones used `doc_path`;
+   * the reader normalizes both into this field downstream.
+   */
+  path: string;
   tokens?: number;
 }
 
@@ -55,7 +60,8 @@ export interface PromptEntry {
   name: string;
   purpose: string;
   description: string;
-  prompt_path: string;
+  /** Relative path to the prompt body file. See DocEntry.path note. */
+  path: string;
   input_vars: readonly {
     name: string;
     description?: string;
@@ -92,12 +98,12 @@ export class CatalogReader {
 
   readDocs(): Record<string, DocEntry> {
     this.docsCache = this.readPartition("docs.json", this.docsCache);
-    return this.docsCache.data.entries;
+    return normalizePathField(this.docsCache.data.entries, "doc_path");
   }
 
   readPrompts(): Record<string, PromptEntry> {
     this.promptsCache = this.readPartition("prompts.json", this.promptsCache);
-    return this.promptsCache.data.entries;
+    return normalizePathField(this.promptsCache.data.entries, "prompt_path");
   }
 
   /** Invalidate all cached partitions. */
@@ -156,6 +162,24 @@ export class CatalogReader {
     }
     return { data: parsed as T, loadedAt: now, mtimeMs: stat.mtimeMs };
   }
+}
+
+/**
+ * Normalize a legacy field name (doc_path / prompt_path) into the modern
+ * `path` field. Mutates entries in place — called per-read, but the cache
+ * entry already went through this so subsequent reads are no-ops.
+ */
+function normalizePathField<T extends { path: string }>(
+  entries: Record<string, T>,
+  legacyField: string,
+): Record<string, T> {
+  for (const entry of Object.values(entries)) {
+    const e = entry as unknown as Record<string, unknown>;
+    if (!e["path"] && typeof e[legacyField] === "string") {
+      e["path"] = e[legacyField];
+    }
+  }
+  return entries;
 }
 
 export function detectLayout(catalogPath: string): CatalogLayout {

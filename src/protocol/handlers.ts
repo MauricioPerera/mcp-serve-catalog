@@ -167,7 +167,7 @@ async function handleResourcesRead(
       `unknown resource: '${uri}'`,
     );
   }
-  const filePath = ctx.reader.contentPath(doc.doc_path);
+  const filePath = ctx.reader.contentPath(doc.path);
   let body: string;
   try {
     body = await fs.readFile(filePath, "utf8");
@@ -209,7 +209,7 @@ async function handlePromptsGet(
       `unknown prompt: '${name}'`,
     );
   }
-  const filePath = ctx.reader.contentPath(prompt.prompt_path);
+  const filePath = ctx.reader.contentPath(prompt.path);
   let body: string;
   try {
     body = await fs.readFile(filePath, "utf8");
