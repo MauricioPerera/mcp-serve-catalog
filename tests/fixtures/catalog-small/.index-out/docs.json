@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "category": "docs",
+  "entries": {
+    "hello": {
+      "name": "hello",
+      "title": "Hello Doc",
+      "summary": "A minimal sample doc.",
+      "doc_path": "docs/hello.md",
+      "tokens": 20
+    }
+  }
+}

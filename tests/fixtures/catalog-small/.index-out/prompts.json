@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "category": "prompts",
+  "entries": {
+    "greet": {
+      "name": "greet",
+      "purpose": "Greet someone by name",
+      "description": "Minimal prompt template for tests.",
+      "prompt_path": "prompts/greet.md",
+      "input_vars": [
+        { "name": "name", "description": "who to greet", "required": true }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "category": "skills",
+  "entries": {
+    "echo": {
+      "name": "echo",
+      "when_to_use": "illustrates the SKILL convention — echoes input with a timestamp prefix",
+      "description": "Minimal skill.\nNot for production.",
+      "skill_path": "skills/echo",
+      "entry": "run.sh",
+      "entry_path": "skills/echo/run.sh",
+      "entry_sha": "fixture",
+      "entry_bytes": 100,
+      "estimated_tokens": 30,
+      "args": [
+        {
+          "name": "message",
+          "type": "string",
+          "required": true,
+          "description": "text to echo back"
+        }
+      ],
+      "requires": ["bash", "date", "printf"]
+    }
+  }
+}

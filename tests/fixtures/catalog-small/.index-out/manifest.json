@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "source_sha": "fixture",
+  "generated_at": "2026-04-19T00:00:00Z",
+  "categories": {
+    "skills": { "partition": "skills.json", "count": 1 },
+    "docs": { "partition": "docs.json", "count": 1 },
+    "prompts": { "partition": "prompts.json", "count": 1 },
+    "templates": { "partition": "templates.json", "count": 0 }
+  }
+}
